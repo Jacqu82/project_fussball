@@ -1,0 +1,78 @@
+body {
+    background-color: #0f192a;
+    color: #ddd;
+    background-image: url("../img/dark.jpg");
+}
+
+
+/*.forms, #username, #password, #id {*/
+    /*width: 30%;*/
+    /*padding: 12px 20px;*/
+    /*margin: 8px 0;*/
+    /*display: inline-block;*/
+    /*border: 1px solid #ccc;*/
+    /*border-radius: 4px;*/
+    /*box-sizing: border-box;*/
+    /*color: #0f192a;*/
+/*}*/
+
+/*.button, button {*/
+    /*background-color: #4CAF50;*/
+    /*color: white;*/
+    /*padding: 14px 20px;*/
+    /*margin: 8px 0;*/
+    /*border: none;*/
+    /*cursor: pointer;*/
+    /*width: 30%;*/
+    /*border-radius: 4px;*/
+/*}*/
+
+/*.btn-delete {*/
+    /*width: 15%;*/
+/*}*/
+
+.links {
+    padding: 14px 20px;
+    margin: 8px 8px;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    border-radius: 4px;
+}
+
+.file {
+    width: 200px;
+    margin: 0 auto;
+}
+
+/*input[type=radio  ] {*/
+    /*width: 0.875em;*/
+    /*height: 0.875em;*/
+    /*margin: 0.25em 0.5em 0.25em 0.25em;*/
+    /*border: 0.0625em solid rgb(192,192,192);*/
+    /*border-radius: 0.25em;*/
+    /*font-size : 2em;*/
+/*}*/
+
+.container {
+    width: 1000px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+h1 {
+    font-family: 'Trocchi', serif;
+    font-size: 45px;
+    font-weight: normal;
+    line-height: 48px;
+    margin: 0;
+}
+
+h4 {
+    color: gold;
+}
+
+h2 {
+    color: green;
+}
