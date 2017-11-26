@@ -1,6 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
+    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
         <h2>Edycja zawodnika</h2>
         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
@@ -11,4 +12,5 @@
     <p class="text-center">
         <a href="{{ path('show_player_id', {'id': player.id}) }}" class="btn btn-default">Powrót</a>
     </p>
+    {% include 'widgets/footer.html.twig' %}
 {% endblock %}

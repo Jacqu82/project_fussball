@@ -1,14 +1,17 @@
 {% extends "::base.html.twig" %}
 
+
 {% block body %}
+    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
         <h1>Ekstraklasa</h1>
         <hr/>
         <img src="{{ asset('img/ekstraklasa.jpg') }}" width="300" height="250"/>
         <hr/>
+        {% if is_granted('ROLE_ADMIN') %}
         <h3><a href="{{ path('club_add') }}" class="links btn btn-success">Dodaj klub do bazy</a></h3>
         <h3><a href="{{ path('player_add') }}" class="links btn btn-success">Dodaj zawodnika do bazy</a></h3>
-        <h3><a href="{{ path('show_all') }}" class="links btn btn-info">Wszystkie kluby</a></h3>
+        {% endif %}
     </div>
-
+    {% include 'widgets/footer.html.twig' %}
 {% endblock %}

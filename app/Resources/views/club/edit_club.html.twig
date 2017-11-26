@@ -1,6 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
+    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
         <h2>Edycja klubu</h2>
         {{ form_start(form) }}
@@ -11,4 +12,5 @@
     <p class="text-center">
         <a href="{{ path('show_id', {'id': club.id}) }}" class="btn btn-default">Powrót</a>
     </p>
+    {% include 'widgets/footer.html.twig' %}
 {% endblock %}

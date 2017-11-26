@@ -87,3 +87,14 @@ th, td {
     border: 1px hidden #fff;
     padding: 10px;
 }
+
+.user {
+    float: right;
+    margin-top: -15px;
+}
+
+.footer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 25px;
+}

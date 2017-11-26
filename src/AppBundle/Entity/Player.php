@@ -58,14 +58,14 @@ class Player
     /**
      * @var string
      *
-     * @ORM\Column(name="growth", type="string", length=50)
+     * @ORM\Column(name="growth", type="string", length=50, nullable=true)
      */
     private $growth;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="weight", type="string", length=50)
+     * @ORM\Column(name="weight", type="string", length=50, nullable=true)
      */
     private $weight;
 

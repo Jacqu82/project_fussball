@@ -1,6 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
+    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
         <h1>{{ club.name }}</h1>
         <img src="{{ club.getWebPath }}" width="300" height="300">
@@ -83,4 +84,5 @@
         <hr/>
         <a href="{{ path('show_all') }}" class="btn btn-info">Powrót</a>
     </div>
+    {% include 'widgets/footer.html.twig' %}
 {% endblock %}

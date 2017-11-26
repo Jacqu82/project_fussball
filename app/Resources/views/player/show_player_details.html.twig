@@ -1,6 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
+    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
         <h1>{{ player.name }}</h1>
         <h3>Pozycja: {{ player.position }}</h3>
@@ -18,4 +19,5 @@
         <hr/>
         <a href="{{ path('show_id', {'id': player.club.id}) }}" class="btn btn-info">Powrót</a>
     </div>
+    {% include 'widgets/footer.html.twig' %}
 {% endblock %}
