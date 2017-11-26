@@ -3,8 +3,12 @@
 {% block body %}
     <div class="container text-center">
         <h1>Ekstraklasa</h1>
-        <h3><a href="{{ path('club_add') }}" class="links btn btn-default">Dodaj klub do bazy</a></h3>
-        <h3><a href="{{ path('show_all') }}" class="links btn btn-default">Wszystkie kluby</a></h3>
+        <hr/>
+        <img src="{{ asset('img/ekstraklasa.jpg') }}" width="300" height="250"/>
+        <hr/>
+        <h3><a href="{{ path('club_add') }}" class="links btn btn-success">Dodaj klub do bazy</a></h3>
+        <h3><a href="{{ path('player_add') }}" class="links btn btn-success">Dodaj zawodnika do bazy</a></h3>
+        <h3><a href="{{ path('show_all') }}" class="links btn btn-info">Wszystkie kluby</a></h3>
     </div>
 
 {% endblock %}

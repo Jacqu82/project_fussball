@@ -4,7 +4,8 @@
     <div class="container text-center">
         <h1>{{ club.name }}</h1>
         <img src="{{ club.getWebPath }}" width="300" height="300">
-        <h3><a href="{{ club.page }}" target="_blank" class="links btn btn-primary">{{ club.page }}</a></h3>
+        <hr/>
+        <h3><a href="{{ club.page }}" target="_blank" class="links btn btn-success">{{ club.page }}</a></h3>
         <h3>Rok założenia: {{ club.createdAt }}</h3>
         <h3>Barwy: {{ club.colours }}</h3>
         <h3>Adres: {{ club.address }}</h3>
@@ -12,6 +13,65 @@
         <h3>Pojemność stadionu: {{ club.capacity }}</h3>
         <h3>Prezes: {{ club.chairman }}</h3>
         <h3>Trener: {{ club.coach }}</h3>
+        <h1>Kadra:</h1>
+        <table align="center">
+            <tr>
+                <th>Imię i nazwisko</th>
+                <th>Pozycja</th>
+                <th>Kraj pochodzenia</th>
+                <th>Data urodzenia</th>
+                <th>Wzrost/Waga</th>
+                <th>Poprzedni klub</th>
+            </tr>
+        {% for player in club.players %}
+            {% if player.position == 'Bramkarz' %}
+            <tr style="color: red">
+                <td><a href="{{ path('show_player_id', {'id': player.id}) }}" class="btn btn-danger">{{ player.name }}</a></td>
+                <td>{{ player.position }}</td>
+                <td>{{ player.country }}</td>
+                <td>{{ player.dateOfBirth }}</td>
+                <td>{{ player.growth }}/{{ player.weight }}</td>
+                <td>{{ player.previousClub }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        {% for player in club.players %}
+            {% if player.position == 'Obrońca' %}
+            <tr style="color: gold">
+                <td><a href="{{ path('show_player_id', {'id': player.id}) }}" class="btn btn-warning">{{ player.name }}</a></td>
+                <td>{{ player.position }}</td>
+                <td>{{ player.country }}</td>
+                <td>{{ player.dateOfBirth }}</td>
+                <td>{{ player.growth }}/{{ player.weight }}</td>
+                <td>{{ player.previousClub }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        {% for player in club.players %}
+            {% if player.position == 'Pomocnik' %}
+            <tr style="color: green">
+                <td><a href="{{ path('show_player_id', {'id': player.id}) }}" class="btn btn-success">{{ player.name }}</a></td>
+                <td>{{ player.position }}</td>
+                <td>{{ player.country }}</td>
+                <td>{{ player.dateOfBirth }}</td>
+                <td>{{ player.growth }}/{{ player.weight }}</td>
+                <td>{{ player.previousClub }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        {% for player in club.players %}
+            {% if player.position == 'Napastnik' %}
+            <tr style="color: blue">
+                <td><a href="{{ path('show_player_id', {'id': player.id}) }}" class="btn btn-primary">{{ player.name }}</a></td>
+                <td>{{ player.position }}</td>
+                <td>{{ player.country }}</td>
+                <td>{{ player.dateOfBirth }}</td>
+                <td>{{ player.growth }}/{{ player.weight }}</td>
+                <td>{{ player.previousClub }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        </table>
         <hr/>
         <a href="{{ path('club_edit', {'id': club.id}) }}" class="btn btn-warning">Edytuj dane</a><br/><br/>
         <a href="{{ path('emblem_edit', {'id': club.id}) }}" class="btn btn-warning">Edytuj zdjęcie</a>
@@ -21,6 +81,6 @@
             {{ form_rest(deleteForm) }}
         {{ form_end(deleteForm) }}
         <hr/>
-        <a href="{{ path('show_all') }}" class="btn btn-default">Powrót</a>
+        <a href="{{ path('show_all') }}" class="btn btn-info">Powrót</a>
     </div>
 {% endblock %}

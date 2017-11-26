@@ -12,10 +12,11 @@
                 </a>
             {% endif %}
         {% endfor %}
+        <hr/>
         <h3>Pozostałe kluby</h3>
         {% for club in clubs %}
             {% if club.name != 'Górnik Zabrze' %}
-                <a href="{{ path('show_id', {'id': club.id}) }}" class="links btn btn-primary">{{ club.name }}<br/>
+                <a href="{{ path('show_id', {'id': club.id}) }}" class="links btn btn-info">{{ club.name }}<br/>
                     <img src="{{ club.getWebPath }}" width="200" height="200">
                 </a>
             {% endif %}
@@ -29,6 +30,6 @@
             {#</a>#}
         {% endfor %}
         <hr/>
-        <a href="{{ path('homepage') }}" class="btn btn-default">Strona główna</a>
+        <a href="{{ path('homepage') }}" class="btn btn-primary">Strona główna</a>
     </div>
 {% endblock %}

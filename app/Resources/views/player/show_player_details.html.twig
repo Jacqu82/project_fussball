@@ -1,0 +1,21 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div class="container text-center">
+        <h1>{{ player.name }}</h1>
+        <h3>Pozycja: {{ player.position }}</h3>
+        <h3>Kraj pochodzenia: {{ player.country }}</h3>
+        <h3>Data urodzenia: {{ player.dateOfBirth }}</h3>
+        <h3>Wzrost/Waga: {{ player.growth }}cm / {{ player.weight }}kg</h3>
+        <h3>Poprzedni klub: {{ player.previousClub }}</h3>
+        <hr/>
+        <a href="{{ path('player_edit', {'id': player.id}) }}" class="btn btn-warning">Edytuj dane</a>
+        <hr/>
+        {{ form_start(deleteForm) }}
+            {{ form_widget(deleteForm.submit) }}
+            {{ form_rest(deleteForm) }}
+        {{ form_end(deleteForm) }}
+        <hr/>
+        <a href="{{ path('show_id', {'id': player.club.id}) }}" class="btn btn-info">Powrót</a>
+    </div>
+{% endblock %}

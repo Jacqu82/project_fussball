@@ -22,75 +22,67 @@ class ClubType extends AbstractType
             ->add('emblem', FileType::class, [
                 'label' => 'Dodaj Herb',
                 'data_class' => null,
-                'attr' => [
-                    'class' => 'file'
-                ]
+                'attr' => ['class' => 'file']
             ])
             ->add('name', TextType::class, [
                 'label' => ' ',
                 'attr' => [
-                    'class' => 'forms',
                     'placeholder' => 'Nazwa'
                 ]
             ])
             ->add('createdAt', TextType::class, [
                 'label' => ' ',
                 'attr' => [
-                    'class' => 'forms',
                     'placeholder' => 'Data założenia'
                 ]
             ])
             ->add('colours', TextType::class, [
                 'label' => ' ',
                 'attr' => [
-                    'class' => 'forms',
                     'placeholder' => 'Barwy klubowe'
                 ]
             ])
             ->add('address', TextType::class, [
                 'label' => ' ',
                 'attr' => [
-                    'class' => 'forms',
                     'placeholder' => 'Adres klubu'
                 ]
             ])
             ->add('page', TextType::class, [
                 'label' => ' ',
                 'attr' => [
-                    'class' => 'forms',
                     'placeholder' => 'Strona WWW'
                 ]
             ])
             ->add('stadium', TextType::class, [
                 'label' => ' ',
                 'attr' => [
-                    'class' => 'forms',
                     'placeholder' => 'Stadion'
                 ]
             ])
             ->add('capacity', TextType::class, [
                 'label' => ' ',
                 'attr' => [
-                    'class' => 'forms',
                     'placeholder' => 'Pojemność stadionu'
                 ]
             ])
             ->add('chairman', TextType::class, [
                 'label' => ' ',
                 'attr' => [
-                    'class' => 'forms',
                     'placeholder' => 'Prezes'
                 ]
             ])
             ->add('coach', TextType::class, [
                 'label' => ' ',
                 'attr' => [
-                    'class' => 'forms',
                     'placeholder' => 'Trener'
                 ]
             ])
             ->add('save', SubmitType::class, array(
-                'label' => 'Dodaj'));
+                'label' => 'Dodaj',
+                'attr' => [
+                    'class' => 'btn btn-success'
+                ]));
 
         if ($options['edit']) {
             $builder
@@ -102,7 +94,10 @@ class ClubType extends AbstractType
                     ]
                 ])
                 ->add('save', SubmitType::class, array(
-                'label' => 'Edytuj'));
+                'label' => 'Edytuj',
+                'attr' => [
+                    'class' => 'btn btn-success'
+                ]));
         }
 
         if ($options['noPhoto']) {

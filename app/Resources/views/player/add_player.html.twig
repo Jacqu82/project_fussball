@@ -1,0 +1,10 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div class="container text-center">
+    <h3>Dodaj zawodnika</h3>
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

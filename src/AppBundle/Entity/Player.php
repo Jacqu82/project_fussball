@@ -37,9 +37,9 @@ class Player
     /**
      * @var string
      *
-     * @ORM\Column(name="surname", type="string", length=50)
+     * @ORM\Column(name="position", type="string", length=10)
      */
-    private $surname;
+    private $position;
 
     /**
      * @var string
@@ -51,7 +51,7 @@ class Player
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_of_birth", type="date")
+     * @ORM\Column(name="date_of_birth", type="string", length=50)
      */
     private $dateOfBirth;
 
@@ -110,6 +110,32 @@ class Player
     {
         return $this->name;
     }
+
+
+    /**
+     * Set position
+     *
+     * @param string $position
+     *
+     * @return $this
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return string
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
 
     /**
      * Set surname
