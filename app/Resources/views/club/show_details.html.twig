@@ -74,8 +74,15 @@
         {% endfor %}
         </table>
         <hr/>
+        <div class="container text-center">
+            <h3>Położenie stadionu na mapie</h3>
+        </div>
+        <div class="container map">
+        {% include 'widgets/location.html.twig' %}
+        </div>
+        <hr/>
         <a href="{{ path('club_edit', {'id': club.id}) }}" class="btn btn-warning">Edytuj dane</a><br/><br/>
-        <a href="{{ path('emblem_edit', {'id': club.id}) }}" class="btn btn-warning">Edytuj zdjęcie</a>
+        <a href="{{ path('emblem_edit', {'id': club.id}) }}" class="btn btn-warning">Edytuj herb</a>
         <hr/>
         {{ form_start(deleteForm) }}
             {{ form_widget(deleteForm.submit) }}

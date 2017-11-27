@@ -11,7 +11,7 @@ class ClubManager extends EntityManager
 {
     protected $entityName = 'Club';
 
-    public function getRateRepository()
+    public function getClubRepository()
     {
         return $this->em->getRepository('AppBundle:Club');
     }
@@ -19,6 +19,11 @@ class ClubManager extends EntityManager
     public function getAllClubsByName()
     {
         return $this->repository->findBy(array(), array('name' => 'ASC'));
+    }
+
+    public function getLocations()
+    {
+        return $this->getClubRepository()->getLocations();
     }
 
 
@@ -33,6 +38,8 @@ class ClubManager extends EntityManager
         $capacity = $club->getCapacity();
         $chairman = $club->getChairman();
         $coach = $club->getCoach();
+        $longitude = $club->getLongitude();
+        $latitude = $club->getLatitude();
 
         $club
             ->setName($name)
@@ -43,7 +50,9 @@ class ClubManager extends EntityManager
             ->setStadium($stadium)
             ->setCapacity($capacity)
             ->setChairman($chairman)
-            ->setCoach($coach);
+            ->setCoach($coach)
+            ->setLongitude($longitude)
+            ->setLatitude($latitude);
 
         $this->em->persist($club);
         $this->em->flush();

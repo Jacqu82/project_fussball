@@ -96,6 +96,16 @@ class Club
      */
     private $coach;
 
+    /**
+     * @ORM\Column(name="longitude", type="decimal", precision=2, scale=1)
+     */
+    private $longitude;
+
+    /**
+     * @ORM\Column(name="latitude", type="decimal", precision=2, scale=1)
+     */
+    private $latitude;
+
 
     /**
      * Constructor
@@ -383,6 +393,55 @@ class Club
     {
         return $this->players;
     }
+
+    /**
+     * Set longitude
+     *
+     * @param string $longitude
+     *
+     * @return $this
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return string
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param string $latitude
+     *
+     * @return $this
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return string
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
 
     /**
      * @return string

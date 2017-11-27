@@ -11,7 +11,7 @@ class PlayerManager extends EntityManager
 {
     protected $entityName = 'Player';
 
-    public function getRateRepository()
+    public function getPlayerRepository()
     {
         return $this->em->getRepository('AppBundle:Player');
     }

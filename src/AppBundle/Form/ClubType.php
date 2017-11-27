@@ -78,6 +78,18 @@ class ClubType extends AbstractType
                     'placeholder' => 'Trener'
                 ]
             ])
+            ->add('longitude', TextType::class, [
+                'label' => ' ',
+                'attr' => [
+                    'placeholder' => 'Długość geograficzna'
+                ]
+            ])
+            ->add('latitude', TextType::class, [
+                'label' => ' ',
+                'attr' => [
+                    'placeholder' => 'Szerokość geograficzna'
+                ]
+            ])
             ->add('save', SubmitType::class, array(
                 'label' => 'Dodaj',
                 'attr' => [
@@ -115,7 +127,9 @@ class ClubType extends AbstractType
                 ->remove('stadium')
                 ->remove('capacity')
                 ->remove('chairman')
-                ->remove('coach');
+                ->remove('coach')
+                ->remove('longitude')
+                ->remove('latitude');
         }
     }
 

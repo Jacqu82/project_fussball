@@ -98,3 +98,9 @@ th, td {
     margin-bottom: 20px;
     font-size: 25px;
 }
+
+.map {
+    width: 70%;
+    margin: 0 auto;
+    color: #0f0f0f;
+}
