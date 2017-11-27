@@ -7,11 +7,13 @@
         <h1>Ekstraklasa</h1>
         <hr/>
         <img src="{{ asset('img/ekstraklasa.jpg') }}" width="300" height="250"/>
-        <hr/>
-        {% if is_granted('ROLE_ADMIN') %}
-        <h3><a href="{{ path('club_add') }}" class="links btn btn-success">Dodaj klub do bazy</a></h3>
-        <h3><a href="{{ path('player_add') }}" class="links btn btn-success">Dodaj zawodnika do bazy</a></h3>
-        {% endif %}
+    </div>
+    <hr/>
+    <div class="container text-center">
+        <h3>Kluby ekstraklasy na mapie Polski</h3>
+    </div>
+    <div class="container map">
+        {% include 'widgets/locations.html.twig' %}
     </div>
     {% include 'widgets/footer.html.twig' %}
 {% endblock %}

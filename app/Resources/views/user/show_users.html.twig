@@ -1,0 +1,17 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    {% include 'widgets/header.html.twig' %}
+    <div class="container text-center">
+    {% if action == true %}
+        <h1>Lista aktywnych użytkowników</h1>
+        {% for user in users %}
+            <a href="{{ path('show_user_id', {'id': user.id}) }}" class="links btn btn-primary">{{ user.username }}</a>
+            <hr/>
+        {% endfor %}
+    {% else %}
+        <h2>Strona tylko dla Admina</h2>
+    {% endif %}
+    </div>
+    {% include 'widgets/footer.html.twig' %}
+{% endblock %}

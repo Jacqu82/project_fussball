@@ -1,0 +1,29 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    {% include 'widgets/header.html.twig' %}
+    <div class="container text-center">
+        <h1>{{ user.username }}</h1>
+        <h3>E-mail: {{ user.email }}</h3>
+        <h3>Ostatnio zalogowany: {{ user.lastLogin|date('d-m-Y H:i:s') }}</h3>
+        {% if user.enabled == 1 %}
+            <h3>Status: Aktywny</h3>
+        {% else %}
+            <h3>Status: Nieaktywny</h3>
+        {% endif %}
+        {% for role in user.roles %}
+            <h3>{{ role }}</h3>
+        {% endfor %}
+        <hr/>
+        {#<a href="{{ path('edit_user', {'id': user.id}) }}" class="btn btn-warning">Edytuj swoje dane</a><br/>#}
+        {{ form_start(deleteForm) }}
+            {{ form_widget(deleteForm.submit) }}
+            {{ form_rest(deleteForm) }}
+        {{ form_end(deleteForm) }}
+        <hr/>
+        <a href="{{ path('show_users') }}" class="btn btn-default">Powrót</a>
+    </div>
+{% endblock %}
+{% block footer %}
+    {% include 'widgets/footer.html.twig' %}
+{% endblock %}

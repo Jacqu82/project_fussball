@@ -2,8 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,13 +33,6 @@ class Season
      */
     private $rounds;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->rounds = new ArrayCollection();
-    }
 
     /**
      * Get id
@@ -76,39 +67,5 @@ class Season
     {
         return $this->seasonYears;
     }
-
-
-    /**
-     * Add round
-     *
-     * @param Round $round
-     *
-     * @return $this
-     */
-    public function addRound(Round $round)
-    {
-        $this->rounds[] = $round;
-
-        return $this;
-    }
-
-    /**
-     * Remove round
-     *
-     * @param Round $round
-     */
-    public function removeRound(Round $round)
-    {
-        $this->rounds->removeElement($round);
-    }
-
-    /**
-     * Get rounds
-     *
-     * @return Collection
-     */
-    public function getRounds()
-    {
-        return $this->rounds;
-    }
 }
+

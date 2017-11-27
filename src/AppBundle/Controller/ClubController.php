@@ -74,13 +74,8 @@ class ClubController extends Controller
     public function showAllClubsAction()
     {
         $clubs = $this->get(ClubManager::class)->getAllClubsByName();
-        $places = $this->get(ClubManager::class)->getLocations();
-        $locations = json_encode($places);
 
-        return $this->render('club/show_all.html.twig', [
-            'clubs' => $clubs,
-            'locations' => $locations
-            ]);
+        return $this->render('club/show_all.html.twig', ['clubs' => $clubs]);
     }
 
     /**
