@@ -81,18 +81,10 @@ class PlayerType extends AbstractType
                 ->add('save', SubmitType::class, array(
                 'label' => 'Edytuj',
                 'attr' => [
-                    'class' => 'btn btn-success'
+                    'class' => 'btn btn-warning'
                 ]));
         }
 
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'player';
     }
 
     /**

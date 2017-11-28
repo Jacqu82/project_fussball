@@ -22,6 +22,11 @@ class Round
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="round")
+     */
+    private $games;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="roundNumber", type="smallint")
@@ -68,5 +73,28 @@ class Round
     {
         return $this->roundNumber;
     }
-}
 
+    /**
+     * Set season
+     *
+     * @param Season $season
+     *
+     * @return $this
+     */
+    public function setSeason(Season $season = null)
+    {
+        $this->season = $season;
+
+        return $this;
+    }
+
+    /**
+     * Get season
+     *
+     * @return Season
+     */
+    public function getSeason()
+    {
+        return $this->season;
+    }
+}

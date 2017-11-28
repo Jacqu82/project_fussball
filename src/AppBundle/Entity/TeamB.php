@@ -7,12 +7,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Round
+ * TeamB
  *
- * @ORM\Table(name="round")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\RoundRepository")
+ * @ORM\Table(name="team_b")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TeamBRepository")
  */
-class Round
+class TeamB
 {
     /**
      * @var int
@@ -24,22 +24,16 @@ class Round
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Game", mappedBy="round")
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=50, unique=true)
+     */
+    private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="teamB")
      */
     private $games;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="roundNumber", type="string")
-     */
-    private $roundNumber;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Season", inversedBy="rounds")
-     * @ORM\JoinColumn(name="season_id", referencedColumnName="id")
-     */
-    private $season;
 
     /**
      * Constructor
@@ -48,7 +42,6 @@ class Round
     {
         $this->games = new ArrayCollection();
     }
-
 
     /**
      * Get id
@@ -61,51 +54,27 @@ class Round
     }
 
     /**
-     * Set roundNumber
+     * Set name
      *
-     * @param string $roundNumber
+     * @param string $name
      *
-     * @return Round
+     * @return TeamB
      */
-    public function setRoundNumber($roundNumber)
+    public function setName($name)
     {
-        $this->roundNumber = $roundNumber;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get roundNumber
+     * Get name
      *
      * @return string
      */
-    public function getRoundNumber()
+    public function getName()
     {
-        return $this->roundNumber;
-    }
-
-    /**
-     * Set season
-     *
-     * @param Season $season
-     *
-     * @return $this
-     */
-    public function setSeason(Season $season = null)
-    {
-        $this->season = $season;
-
-        return $this;
-    }
-
-    /**
-     * Get season
-     *
-     * @return Season
-     */
-    public function getSeason()
-    {
-        return $this->season;
+        return $this->name;
     }
 
     /**
@@ -147,6 +116,6 @@ class Round
      */
     public function __toString()
     {
-        return $this->roundNumber;
+        return $this->name;
     }
 }

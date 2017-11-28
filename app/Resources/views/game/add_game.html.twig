@@ -1,0 +1,12 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    {% include 'widgets/header.html.twig' %}
+    <div class="container text-center">
+    <h3>Dodaj mecz do terminarza</h3>
+        {{ form_start(form) }}
+        {{ form(form) }}
+        {{ form_end(form) }}
+    </div>
+    {% include 'widgets/footer.html.twig' %}
+{% endblock %}

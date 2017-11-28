@@ -108,7 +108,7 @@ class ClubType extends AbstractType
                 ->add('save', SubmitType::class, array(
                 'label' => 'Edytuj',
                 'attr' => [
-                    'class' => 'btn btn-success'
+                    'class' => 'btn btn-warning'
                 ]));
         }
 

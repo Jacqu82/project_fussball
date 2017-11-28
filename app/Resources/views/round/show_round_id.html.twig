@@ -1,0 +1,20 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    {% include 'widgets/header.html.twig' %}
+    <div class="container text-center">
+        <h1>{{ round.roundNumber }}. kolejka</h1>
+        {% for game in round.games %}
+            {% if (game.teamA.id == 1) or (game.teamB.id == 1) %}
+                <h3 style="color: red">{{ game.date }}r.&nbsp; godz. {{ game.hour }} &nbsp;&nbsp;&nbsp;
+                    {{ game.teamA }} {{ game.goalA }} : {{ game.goalB }} {{ game.teamB }}</h3>
+            {% else %}
+                <h3>{{ game.date }}r.&nbsp; godz. {{ game.hour }} &nbsp;&nbsp;&nbsp;
+                    {{ game.teamA }} {{ game.goalA }} : {{ game.goalB }} {{ game.teamB }}</h3>
+            {% endif %}
+        {% endfor %}
+        <hr/>
+        <a href="{{ path('round_show') }}" class="btn btn-info">Powrót</a>
+    </div>
+    {% include 'widgets/footer.html.twig' %}
+{% endblock %}
