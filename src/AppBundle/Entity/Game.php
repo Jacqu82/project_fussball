@@ -28,30 +28,30 @@ class Game
     private $round;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TeamA", inversedBy="games")
-     * @ORM\JoinColumn(name="teamA_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="HomeTeam", inversedBy="games")
+     * @ORM\JoinColumn(name="home_team_id", referencedColumnName="id")
      */
-    private $teamA;
+    private $homeTeam;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TeamB", inversedBy="games")
-     * @ORM\JoinColumn(name="teamB_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="AwayTeam", inversedBy="games")
+     * @ORM\JoinColumn(name="away_team_id", referencedColumnName="id")
      */
-    private $teamB;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="goalA", type="smallint", nullable=true)
-     */
-    private $goalA;
+    private $awayTeam;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="goalB", type="smallint", nullable=true)
+     * @ORM\Column(name="goals_home_team", type="smallint", nullable=true)
      */
-    private $goalB;
+    private $goalsHomeTeam;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="goals_away_team", type="smallint", nullable=true)
+     */
+    private $goalsAwayTeam;
 
     /**
      * @var string
@@ -76,54 +76,6 @@ class Game
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set goalA
-     *
-     * @param integer $goalA
-     *
-     * @return Game
-     */
-    public function setGoalA($goalA)
-    {
-        $this->goalA = $goalA;
-
-        return $this;
-    }
-
-    /**
-     * Get goalA
-     *
-     * @return int
-     */
-    public function getGoalA()
-    {
-        return $this->goalA;
-    }
-
-    /**
-     * Set goalB
-     *
-     * @param integer $goalB
-     *
-     * @return Game
-     */
-    public function setGoalB($goalB)
-    {
-        $this->goalB = $goalB;
-
-        return $this;
-    }
-
-    /**
-     * Get goalB
-     *
-     * @return int
-     */
-    public function getGoalB()
-    {
-        return $this->goalB;
     }
 
     /**
@@ -174,53 +126,6 @@ class Game
         return $this->hour;
     }
 
-    /**
-     * Set teamA
-     *
-     * @param TeamA $teamA
-     *
-     * @return $this
-     */
-    public function setTeamA(TeamA $teamA)
-    {
-        $this->teamA = $teamA;
-
-        return $this;
-    }
-
-    /**
-     * Get teamA
-     *
-     * @return TeamA
-     */
-    public function getTeamA()
-    {
-        return $this->teamA;
-    }
-
-    /**
-     * Set teamB
-     *
-     * @param TeamB $teamB
-     *
-     * @return $this
-     */
-    public function setTeamB(TeamB $teamB)
-    {
-        $this->teamB = $teamB;
-
-        return $this;
-    }
-
-    /**
-     * Get teamB
-     *
-     * @return TeamB
-     */
-    public function getTeamB()
-    {
-        return $this->teamB;
-    }
 
     /**
      * Set round
@@ -244,5 +149,102 @@ class Game
     public function getRound()
     {
         return $this->round;
+    }
+
+
+    /**
+     * Set goalsHomeTeam
+     *
+     * @param integer $goalsHomeTeam
+     *
+     * @return $this
+     */
+    public function setGoalsHomeTeam($goalsHomeTeam)
+    {
+        $this->goalsHomeTeam = $goalsHomeTeam;
+
+        return $this;
+    }
+
+    /**
+     * Get goalsHomeTeam
+     *
+     * @return integer
+     */
+    public function getGoalsHomeTeam()
+    {
+        return $this->goalsHomeTeam;
+    }
+
+    /**
+     * Set goalsAwayTeam
+     *
+     * @param integer $goalsAwayTeam
+     *
+     * @return $this
+     */
+    public function setGoalsAwayTeam($goalsAwayTeam)
+    {
+        $this->goalsAwayTeam = $goalsAwayTeam;
+
+        return $this;
+    }
+
+    /**
+     * Get goalsAwayTeam
+     *
+     * @return integer
+     */
+    public function getGoalsAwayTeam()
+    {
+        return $this->goalsAwayTeam;
+    }
+
+    /**
+     * Set homeTeam
+     *
+     * @param HomeTeam $homeTeam
+     *
+     * @return $this
+     */
+    public function setHomeTeam(HomeTeam $homeTeam = null)
+    {
+        $this->homeTeam = $homeTeam;
+
+        return $this;
+    }
+
+    /**
+     * Get homeTeam
+     *
+     * @return HomeTeam
+     */
+    public function getHomeTeam()
+    {
+        return $this->homeTeam;
+    }
+
+    /**
+     * Set awayTeam
+     *
+     * @param AwayTeam $awayTeam
+     *
+     * @return $this
+     */
+    public function setAwayTeam(awayTeam $awayTeam = null)
+    {
+        $this->awayTeam = $awayTeam;
+
+        return $this;
+    }
+
+    /**
+     * Get awayTeam
+     *
+     * @return AwayTeam
+     */
+    public function getAwayTeam()
+    {
+        return $this->awayTeam;
     }
 }

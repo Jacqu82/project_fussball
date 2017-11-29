@@ -28,30 +28,30 @@ class Game
     private $round;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TeamA", inversedBy="games")
-     * @ORM\JoinColumn(name="teamA_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="HomeTeam", inversedBy="games")
+     * @ORM\JoinColumn(name="home_team_id", referencedColumnName="id")
      */
-    private $teamA;
+    private $homeTeam;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TeamB", inversedBy="games")
-     * @ORM\JoinColumn(name="teamB_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="AwayTeam", inversedBy="games")
+     * @ORM\JoinColumn(name="away_team_id", referencedColumnName="id")
      */
-    private $teamB;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="goalA", type="smallint", nullable=true)
-     */
-    private $goalA;
+    private $AwayTeam;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="goalB", type="smallint", nullable=true)
+     * @ORM\Column(name="goals_home_team", type="smallint", nullable=true)
      */
-    private $goalB;
+    private $goalsHomeTeam;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="goals_away_team", type="smallint", nullable=true)
+     */
+    private $goalsAwayTeam;
 
     /**
      * @var string
@@ -76,54 +76,6 @@ class Game
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set goalA
-     *
-     * @param integer $goalA
-     *
-     * @return Game
-     */
-    public function setGoalA($goalA)
-    {
-        $this->goalA = $goalA;
-
-        return $this;
-    }
-
-    /**
-     * Get goalA
-     *
-     * @return int
-     */
-    public function getGoalA()
-    {
-        return $this->goalA;
-    }
-
-    /**
-     * Set goalB
-     *
-     * @param integer $goalB
-     *
-     * @return Game
-     */
-    public function setGoalB($goalB)
-    {
-        $this->goalB = $goalB;
-
-        return $this;
-    }
-
-    /**
-     * Get goalB
-     *
-     * @return int
-     */
-    public function getGoalB()
-    {
-        return $this->goalB;
     }
 
     /**
@@ -174,51 +126,29 @@ class Game
         return $this->hour;
     }
 
+
     /**
-     * Set teamA
+     * Set round
      *
-     * @param TeamA $teamA
+     * @param Round $round
      *
      * @return $this
      */
-    public function setTeamA(TeamA $teamA)
+    public function setRound(Round $round = null)
     {
-        $this->teamA = $teamA;
+        $this->round = $round;
 
         return $this;
     }
 
     /**
-     * Get teamA
+     * Get round
      *
-     * @return TeamA
+     * @return Round
      */
-    public function getTeamA()
+    public function getRound()
     {
-        return $this->teamA;
+        return $this->round;
     }
 
-    /**
-     * Set teamB
-     *
-     * @param TeamB $teamB
-     *
-     * @return $this
-     */
-    public function setTeamB(TeamB $teamB)
-    {
-        $this->teamB = $teamB;
-
-        return $this;
-    }
-
-    /**
-     * Get teamB
-     *
-     * @return TeamB
-     */
-    public function getTeamB()
-    {
-        return $this->teamB;
-    }
 }

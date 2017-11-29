@@ -5,12 +5,12 @@
     <div class="container text-center">
         <h1>{{ round.roundNumber }}. kolejka</h1>
         {% for game in round.games %}
-            {% if (game.teamA.id == 1) or (game.teamB.id == 1) %}
-                <h3 style="color: red">{{ game.date }}r.&nbsp; godz. {{ game.hour }} &nbsp;&nbsp;&nbsp;
-                    {{ game.teamA }} {{ game.goalA }} : {{ game.goalB }} {{ game.teamB }}</h3>
+            {% if (game.homeTeam.id == 1) or (game.awayTeam.id == 1) %}
+                <h3 style="color: gold">{{ game.date }}r.&nbsp; godz. {{ game.hour }} &nbsp;&nbsp;&nbsp;
+                    {{ game.homeTeam }} {{ game.goalsHomeTeam }} : {{ game.goalsAwayTeam }} {{ game.awayTeam }}</h3>
             {% else %}
                 <h3>{{ game.date }}r.&nbsp; godz. {{ game.hour }} &nbsp;&nbsp;&nbsp;
-                    {{ game.teamA }} {{ game.goalA }} : {{ game.goalB }} {{ game.teamB }}</h3>
+                    {{ game.homeTeam }} {{ game.goalsHomeTeam }} : {{ game.goalsAwayTeam }} {{ game.awayTeam }}</h3>
             {% endif %}
         {% endfor %}
         <hr/>

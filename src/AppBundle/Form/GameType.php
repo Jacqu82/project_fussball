@@ -25,21 +25,21 @@ class GameType extends AbstractType
                 'label' => ' ',
                 'class' => 'AppBundle\Entity\Round'
             ])
-            ->add('teamA', EntityType::class, [
+            ->add('homeTeam', EntityType::class, [
                 'label' => ' ',
-                'class' => 'AppBundle\Entity\TeamA'
+                'class' => 'AppBundle\Entity\HomeTeam'
             ])
-            ->add('goalA', NumberType::class, [
+            ->add('goalsHomeTeam', NumberType::class, [
                 'label' => ' ',
-                'attr' => ['placeholder' => 'GoalA']
+                'attr' => ['placeholder' => 'Liczba goli drużyny domowej']
             ])
-            ->add('teamB', EntityType::class, [
+            ->add('awayTeam', EntityType::class, [
                 'label' => ' ',
-                'class' => 'AppBundle\Entity\TeamB'
+                'class' => 'AppBundle\Entity\AwayTeam'
             ])
-            ->add('goalB', NumberType::class, [
+            ->add('goalsAwayTeam', NumberType::class, [
                 'label' => ' ',
-                'attr' => ['placeholder' => 'GoalB']
+                'attr' => ['placeholder' => 'Liczba goli drużyny wyjazdowej']
             ])
             ->add('date', TextType::class, [
                 'label' => ' ',

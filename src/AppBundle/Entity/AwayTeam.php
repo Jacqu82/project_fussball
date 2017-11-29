@@ -9,10 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TeamB
  *
- * @ORM\Table(name="team_b")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\TeamBRepository")
+ * @ORM\Table(name="away_team")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\AwayTeamRepository")
  */
-class TeamB
+class AwayTeam
 {
     /**
      * @var int
@@ -31,7 +31,7 @@ class TeamB
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Game", mappedBy="teamB")
+     * @ORM\OneToMany(targetEntity="Game", mappedBy="awayTeam")
      */
     private $games;
 
@@ -58,7 +58,7 @@ class TeamB
      *
      * @param string $name
      *
-     * @return TeamB
+     * @return AwayTeam
      */
     public function setName($name)
     {
