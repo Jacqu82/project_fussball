@@ -37,7 +37,7 @@ class ClubController extends Controller
             $club->setEmblem($fileName);
             $this->get(ClubManager::class)->addClub($club);
 
-            return $this->redirectToRoute('show_id', ['id' => $club->getId()]);
+            return $this->redirectToRoute('club_show_id', ['id' => $club->getId()]);
         }
 
         return $this->render('club/add_club.html.twig', ['form' => $form->createView()]);
@@ -45,7 +45,7 @@ class ClubController extends Controller
     }
 
     /**
-     * @Route("/show/{id}", name="show_id")
+     * @Route("/club/show/{id}", name="club_show_id")
      *
      * @param Club $club
      * @return Response
@@ -53,21 +53,21 @@ class ClubController extends Controller
     public function showClubIdAction(Club $club)
     {
         $deleteForm = $this->createFormBuilder()
-            ->setAction($this->generateUrl('delete_club', ['id' => $club->getId()]))
+            ->setAction($this->generateUrl('club_delete', ['id' => $club->getId()]))
             ->setMethod(Request::METHOD_DELETE)
             ->add('submit', SubmitType::class, [
                 'label' => 'Usuń klub',
                 'attr' => ['class' => 'btn btn-danger btn-delete']])
             ->getForm();
 
-        return $this->render('club/show_details.html.twig', [
+        return $this->render('club/show_club_id.html.twig', [
             'club' => $club,
             'deleteForm' => $deleteForm->createView()
         ]);
     }
 
     /**
-     * @Route("/show", name="show_all")
+     * @Route("/club/show", name="club_show_all")
      *
      * @return Response
      */
@@ -75,11 +75,11 @@ class ClubController extends Controller
     {
         $clubs = $this->get(ClubManager::class)->getAllClubsByName();
 
-        return $this->render('club/show_all.html.twig', ['clubs' => $clubs]);
+        return $this->render('club/show_all_clubs.html.twig', ['clubs' => $clubs]);
     }
 
     /**
-     * @Route("/edit{id}", name="club_edit")
+     * @Route("/club/edit{id}", name="club_edit")
      *
      * @param Request $request
      * @param Club $club
@@ -96,7 +96,7 @@ class ClubController extends Controller
             $club->setEmblem($file);
             $this->get(ClubManager::class)->editClub($club);
 
-            return $this->redirectToRoute('show_id', ['id' => $club->getId()]);
+            return $this->redirectToRoute('club_show_id', ['id' => $club->getId()]);
         }
 
         return $this->render('club/edit_club.html.twig', [
@@ -106,7 +106,7 @@ class ClubController extends Controller
     }
 
     /**
-     * @Route("/edit/emblem/{id}", name="emblem_edit")
+     * @Route("/emblem/edit/{id}", name="emblem_edit")
      *
      * @param Request $request
      * @param Club $club
@@ -130,10 +130,10 @@ class ClubController extends Controller
             $club->setEmblem($fileName);
             $this->get(ClubManager::class)->editClub($club);
 
-            return $this->redirectToRoute('show_id', ['id' => $club->getId()]);
+            return $this->redirectToRoute('club_show_id', ['id' => $club->getId()]);
         }
 
-        return $this->render('club/edit_photo.html.twig', [
+        return $this->render('club/edit_emblem.html.twig', [
             'club' => $club,
             'form' => $form->createView()
         ]);
@@ -141,7 +141,7 @@ class ClubController extends Controller
     }
 
     /**
-     * @Route("/delete/{id}", name="delete_club")
+     * @Route("/club/delete/{id}", name="club_delete")
      *
      * @Method("DELETE")
      * @param Club $club
@@ -150,6 +150,6 @@ class ClubController extends Controller
     public function deleteClubAction(Club $club)
     {
         $this->get(ClubManager::class)->deleteClub($club);
-        return $this->redirectToRoute('show_all');
+        return $this->redirectToRoute('club_show_all');
     }
 }

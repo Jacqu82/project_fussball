@@ -136,31 +136,6 @@ class Player
         return $this->position;
     }
 
-
-    /**
-     * Set surname
-     *
-     * @param string $surname
-     *
-     * @return $this
-     */
-    public function setSurname($surname)
-    {
-        $this->surname = $surname;
-
-        return $this;
-    }
-
-    /**
-     * Get surname
-     *
-     * @return string
-     */
-    public function getSurname()
-    {
-        return $this->surname;
-    }
-
     /**
      * Set country
      *
@@ -298,7 +273,7 @@ class Player
     /**
      * Get club
      *
-     * @return string
+     * @return Club
      */
     public function getClub()
     {

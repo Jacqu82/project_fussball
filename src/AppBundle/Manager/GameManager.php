@@ -42,4 +42,16 @@ class GameManager extends EntityManager
         $this->em->persist($game);
         $this->em->flush();
     }
+
+    public function editGame(Game $game)
+    {
+        $this->em->persist($game);
+        $this->em->flush();
+    }
+
+    public function deleteGame(Game $game)
+    {
+        $this->em->remove($game);
+        $this->em->flush();
+    }
 }

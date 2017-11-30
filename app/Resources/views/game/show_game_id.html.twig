@@ -1,0 +1,21 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    {% include 'widgets/header.html.twig' %}
+    <div class="container text-center">
+        <h1>{{ game.date }}r.&nbsp; godz. {{ game.hour }}<br/><br/>
+            {{ game.homeTeam }} {{ game.goalsHomeTeam }} : {{ game.goalsAwayTeam }} {{ game.awayTeam }}</h1>
+        <hr/>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('game_edit', {'id': game.id}) }}" class="btn btn-warning">Edytuj dane meczowe</a>
+        <hr/>
+        {{ form_start(deleteForm) }}
+            {{ form_widget(deleteForm.submit) }}
+            {{ form_rest(deleteForm) }}
+        {{ form_end(deleteForm) }}
+        <hr/>
+    {% endif %}
+        <a href="{{ path('round_show_id', {'id': game.round.id}) }}" class="btn btn-info">Powrót</a>
+    </div>
+    {% include 'widgets/footer.html.twig' %}
+{% endblock %}

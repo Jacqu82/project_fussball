@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,9 +24,7 @@ class Club
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\OneToMany(targetEntity="Player", mappedBy="Club")
+     * @ORM\OneToMany(targetEntity="Player", mappedBy="club")
      */
     private $players;
 
@@ -36,11 +36,14 @@ class Club
     private $name;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="emblem", type="text")
      */
     private $emblem;
+
+    /**
+     * @ORM\Column(name="content", type="text")
+     */
+    private $content;
 
     /**
      * @var string
@@ -98,6 +101,25 @@ class Club
      */
     private $coach;
 
+    /**
+     * @ORM\Column(name="longitude", type="decimal", precision=2, scale=1)
+     */
+    private $longitude;
+
+    /**
+     * @ORM\Column(name="latitude", type="decimal", precision=2, scale=1)
+     */
+    private $latitude;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->players = new ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -114,7 +136,7 @@ class Club
      *
      * @param string $name
      *
-     * @return Club
+     * @return $this
      */
     public function setName($name)
     {
@@ -133,13 +155,6 @@ class Club
         return $this->name;
     }
 
-    /**
-     * Set emblem
-     *
-     * @param string $emblem
-     *
-     * @return Club
-     */
     public function setEmblem($emblem)
     {
         $this->emblem = $emblem;
@@ -147,14 +162,14 @@ class Club
         return $this;
     }
 
-    /**
-     * Get emblem
-     *
-     * @return string
-     */
     public function getEmblem()
     {
         return $this->emblem;
+    }
+
+    public function getWebPath()
+    {
+        return '/photo/' . $this->emblem;
     }
 
     /**
@@ -162,7 +177,7 @@ class Club
      *
      * @param string $createdAt
      *
-     * @return Club
+     * @return $this
      */
     public function setCreatedAt($createdAt)
     {
@@ -186,7 +201,7 @@ class Club
      *
      * @param string $colours
      *
-     * @return Club
+     * @return $this
      */
     public function setColours($colours)
     {
@@ -210,7 +225,7 @@ class Club
      *
      * @param string $address
      *
-     * @return Club
+     * @return $this
      */
     public function setAddress($address)
     {
@@ -234,7 +249,7 @@ class Club
      *
      * @param string $page
      *
-     * @return Club
+     * @return $this
      */
     public function setPage($page)
     {
@@ -258,7 +273,7 @@ class Club
      *
      * @param string $stadium
      *
-     * @return Club
+     * @return $this
      */
     public function setStadium($stadium)
     {
@@ -282,7 +297,7 @@ class Club
      *
      * @param string $capacity
      *
-     * @return Club
+     * @return $this
      */
     public function setCapacity($capacity)
     {
@@ -306,7 +321,7 @@ class Club
      *
      * @param string $chairman
      *
-     * @return Club
+     * @return $this
      */
     public function setChairman($chairman)
     {
@@ -330,7 +345,7 @@ class Club
      *
      * @param string $coach
      *
-     * @return Club
+     * @return $this
      */
     public function setCoach($coach)
     {
@@ -348,5 +363,96 @@ class Club
     {
         return $this->coach;
     }
-}
 
+
+    /**
+     * Add player
+     *
+     * @param Player $player
+     *
+     * @return $this
+     */
+    public function addPlayer(Player $player)
+    {
+        $this->players[] = $player;
+
+        return $this;
+    }
+
+    /**
+     * Remove player
+     *
+     * @param Player $player
+     */
+    public function removePlayer(Player $player)
+    {
+        $this->players->removeElement($player);
+    }
+
+    /**
+     * Get players
+     *
+     * @return Collection
+     */
+    public function getPlayers()
+    {
+        return $this->players;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param string $longitude
+     *
+     * @return $this
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return string
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param string $latitude
+     *
+     * @return $this
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return string
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
+}

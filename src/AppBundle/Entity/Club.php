@@ -41,6 +41,11 @@ class Club
     private $emblem;
 
     /**
+     * @ORM\Column(name="content", type="text")
+     */
+    private $content;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="created_at", type="string", length=100)
@@ -449,5 +454,29 @@ class Club
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     *
+     * @return $this
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
     }
 }

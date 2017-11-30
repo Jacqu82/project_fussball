@@ -43,10 +43,10 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/user/show", name="show_users")
+     * @Route("/user/show", name="show_users_all")
      * @return Response
      */
-    public function showUsersAction()
+    public function showAllUsersAction()
     {
         if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $action = true;
@@ -60,15 +60,15 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("user/show/{id}", name="show_user_id")
+     * @Route("user/show/{id}", name="user_show_id")
      *
      * @param User $user
      * @return Response
      */
-    public function showIdAction(User $user)
+    public function showUserIdAction(User $user)
     {
         $deleteForm = $this->createFormBuilder()
-            ->setAction($this->generateUrl('delete_user', ['id' => $user->getId()]))
+            ->setAction($this->generateUrl('user_delete', ['id' => $user->getId()]))
             ->setMethod(Request::METHOD_DELETE)
             ->add('submit', SubmitType::class, [
                 'label' => 'Usuń',
@@ -82,7 +82,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/user/delete/{id}", name="delete_user")
+     * @Route("/user/delete/{id}", name="user_delete")
      *
      * @Method("DELETE")
      * @param User $user
@@ -91,6 +91,6 @@ class DefaultController extends Controller
     public function deleteUserAction(User $user)
     {
         $this->get(UserManager::class)->deleteUser($user);
-        return $this->redirectToRoute('show_users');
+        return $this->redirectToRoute('show_users_all');
     }
 }

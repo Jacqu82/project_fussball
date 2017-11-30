@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Club;
 use AppBundle\Entity\Player;
 use AppBundle\Form\PlayerType;
 use AppBundle\Manager\PlayerManager;
@@ -31,8 +30,6 @@ class PlayerController extends Controller
 
         if ($form->isSubmitted()) {
             $this->get(PlayerManager::class)->addPlayer($player);
-
-//            return $this->redirectToRoute('show_id', ['id' => $player->getId()]);
         }
 
         return $this->render('player/add_player.html.twig', ['form' => $form->createView()]);
@@ -40,7 +37,7 @@ class PlayerController extends Controller
     }
 
     /**
-     * @Route("/show/player/{id}", name="show_player_id")
+     * @Route("/player/show/{id}", name="player_show_id")
      *
      * @param Player $player
      * @return Response
@@ -48,14 +45,14 @@ class PlayerController extends Controller
     public function showPlayerIdAction(Player $player)
     {
         $deleteForm = $this->createFormBuilder()
-            ->setAction($this->generateUrl('delete_player', ['id' => $player->getId()]))
+            ->setAction($this->generateUrl('player_delete', ['id' => $player->getId()]))
             ->setMethod(Request::METHOD_DELETE)
             ->add('submit', SubmitType::class, [
                 'label' => 'Usuń zawodnika',
                 'attr' => ['class' => 'btn btn-danger btn-delete']])
             ->getForm();
 
-        return $this->render('player/show_player_details.html.twig', [
+        return $this->render('player/show_player_id.html.twig', [
             'player' => $player,
             'deleteForm' => $deleteForm->createView()
         ]);
@@ -63,7 +60,7 @@ class PlayerController extends Controller
 
 
     /**
-     * @Route("/edit/player/{id}", name="player_edit")
+     * @Route("/player/edit/{id}", name="player_edit")
      *
      * @param Request $request
      * @param Player $player
@@ -77,7 +74,7 @@ class PlayerController extends Controller
         if ($form->isSubmitted()) {
             $this->get(PlayerManager::class)->editPlayer($player);
 
-            return $this->redirectToRoute('show_player_id', ['id' => $player->getId()]);
+            return $this->redirectToRoute('player_show_id', ['id' => $player->getId()]);
         }
 
         return $this->render('player/edit_player.html.twig', [
@@ -88,7 +85,7 @@ class PlayerController extends Controller
 
 
     /**
-     * @Route("/delete/player/{id}", name="delete_player")
+     * @Route("/player/delete/{id}", name="player_delete")
      *
      * @Method("DELETE")
      * @param Player $player
@@ -97,7 +94,7 @@ class PlayerController extends Controller
     public function deletePlayerAction(Player $player)
     {
         $this->get(PlayerManager::class)->deletePlayer($player);
-        return $this->redirectToRoute('show_all');
+        return $this->redirectToRoute('club_show_id', ['id' => $player->getClub()->getId()]);
     }
 
 

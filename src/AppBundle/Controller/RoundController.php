@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 class RoundController extends Controller
 {
     /**
-     * @Route("/round/show", name="round_show")
+     * @Route("/round/show", name="round_show_all")
      *
      * @return Response
      */
@@ -19,7 +19,7 @@ class RoundController extends Controller
     {
         $rounds = $this->get(RoundManager::class)->getAllRounds();
 
-        return $this->render('round/show_rounds.html.twig', ['rounds' => $rounds]);
+        return $this->render('round/show_all_rounds.html.twig', ['rounds' => $rounds]);
     }
 
     /**
@@ -28,7 +28,7 @@ class RoundController extends Controller
      * @param Round $round
      * @return Response
      */
-    public function showPlayerIdAction(Round $round)
+    public function showRoundIdAction(Round $round)
     {
         return $this->render('round/show_round_id.html.twig', [
             'round' => $round,

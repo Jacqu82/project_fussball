@@ -30,6 +30,12 @@ class ClubType extends AbstractType
                     'placeholder' => 'Nazwa'
                 ]
             ])
+            ->add('content', TextType::class, [
+                'label' => ' ',
+                'attr' => [
+                    'placeholder' => 'Opis'
+                ]
+            ])
             ->add('createdAt', TextType::class, [
                 'label' => ' ',
                 'attr' => [
@@ -120,6 +126,7 @@ class ClubType extends AbstractType
         if ($options['justPhoto']) {
             $builder
                 ->remove('name')
+                ->remove('content')
                 ->remove('createdAt')
                 ->remove('colours')
                 ->remove('address')

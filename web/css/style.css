@@ -4,6 +4,15 @@ body {
     background-image: url("../img/dark.jpg");
 }
 
+a:hover {
+    text-decoration: none;
+}
+
+form {
+    width: 50%;
+    margin: 0 auto;
+}
+
 
 /*.forms, #username, #password, #id {*/
     /*width: 30%;*/

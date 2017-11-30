@@ -14,6 +14,8 @@
         <h3>Pojemność stadionu: {{ club.capacity }}</h3>
         <h3>Prezes: {{ club.chairman }}</h3>
         <h3>Trener: {{ club.coach }}</h3>
+        <h3>Największe sukcesy: </h3>
+        <h5>{{ club.content }}</h5>
         <h1>Kadra:</h1>
         <table align="center">
             <tr>
@@ -27,7 +29,7 @@
         {% for player in club.players %}
             {% if player.position == 'Bramkarz' %}
             <tr style="color: red">
-                <td><a href="{{ path('show_player_id', {'id': player.id}) }}" class="btn btn-danger">{{ player.name }}</a></td>
+                <td><a href="{{ path('player_show_id', {'id': player.id}) }}" class="btn btn-danger">{{ player.name }}</a></td>
                 <td>{{ player.position }}</td>
                 <td>{{ player.country }}</td>
                 <td>{{ player.dateOfBirth }}</td>
@@ -39,7 +41,7 @@
         {% for player in club.players %}
             {% if player.position == 'Obrońca' %}
             <tr style="color: gold">
-                <td><a href="{{ path('show_player_id', {'id': player.id}) }}" class="btn btn-warning">{{ player.name }}</a></td>
+                <td><a href="{{ path('player_show_id', {'id': player.id}) }}" class="btn btn-warning">{{ player.name }}</a></td>
                 <td>{{ player.position }}</td>
                 <td>{{ player.country }}</td>
                 <td>{{ player.dateOfBirth }}</td>
@@ -51,7 +53,7 @@
         {% for player in club.players %}
             {% if player.position == 'Pomocnik' %}
             <tr style="color: green">
-                <td><a href="{{ path('show_player_id', {'id': player.id}) }}" class="btn btn-success">{{ player.name }}</a></td>
+                <td><a href="{{ path('player_show_id', {'id': player.id}) }}" class="btn btn-success">{{ player.name }}</a></td>
                 <td>{{ player.position }}</td>
                 <td>{{ player.country }}</td>
                 <td>{{ player.dateOfBirth }}</td>
@@ -63,7 +65,7 @@
         {% for player in club.players %}
             {% if player.position == 'Napastnik' %}
             <tr style="color: blue">
-                <td><a href="{{ path('show_player_id', {'id': player.id}) }}" class="btn btn-primary">{{ player.name }}</a></td>
+                <td><a href="{{ path('player_show_id', {'id': player.id}) }}" class="btn btn-primary">{{ player.name }}</a></td>
                 <td>{{ player.position }}</td>
                 <td>{{ player.country }}</td>
                 <td>{{ player.dateOfBirth }}</td>
@@ -81,15 +83,17 @@
         {% include 'widgets/location.html.twig' %}
         </div>
         <hr/>
-        <a href="{{ path('club_edit', {'id': club.id}) }}" class="btn btn-warning">Edytuj dane</a><br/><br/>
-        <a href="{{ path('emblem_edit', {'id': club.id}) }}" class="btn btn-warning">Edytuj herb</a>
-        <hr/>
-        {{ form_start(deleteForm) }}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('club_edit', {'id': club.id}) }}" class="btn btn-warning">Edytuj dane</a><br/><br/>
+            <a href="{{ path('emblem_edit', {'id': club.id}) }}" class="btn btn-warning">Edytuj herb</a>
+            <hr/>
+            {{ form_start(deleteForm) }}
             {{ form_widget(deleteForm.submit) }}
             {{ form_rest(deleteForm) }}
-        {{ form_end(deleteForm) }}
-        <hr/>
-        <a href="{{ path('show_all') }}" class="btn btn-info">Powrót</a>
+            {{ form_end(deleteForm) }}
+            <hr/>
+        {% endif %}
+        <a href="{{ path('club_show_all') }}" class="btn btn-info">Powrót</a>
     </div>
     {% include 'widgets/footer.html.twig' %}
 {% endblock %}
