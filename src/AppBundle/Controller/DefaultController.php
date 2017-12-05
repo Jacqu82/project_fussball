@@ -2,7 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\User;
+use AppBundle\Entity\User\User;
+use AppBundle\Form\UserType;
 use AppBundle\Manager\ClubManager;
 use AppBundle\Manager\UserManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -78,6 +79,32 @@ class DefaultController extends Controller
         return $this->render('user/user_details.html.twig', [
             'user' => $user,
             'deleteForm' => $deleteForm->createView()
+        ]);
+    }
+
+    /**
+     * @Route("user/edit/{id}", name="user_edit")
+     *
+     * @param User $user
+     * @param Request $request
+     * @return Response
+     */
+    public function editUserAction(Request $request, User $user)
+    {
+        $form = $this->createForm(UserType::class, $user, ['edit' => true]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $this->get(UserManager::class)->editUser($user);
+
+                return $this->redirectToRoute('user_show_id', ['id' => $user->getId()]);
+            }
+        }
+
+        return $this->render('user/edit_user.html.twig', [
+            'form' => $form->createView(),
+            'user' => $user
         ]);
     }
 

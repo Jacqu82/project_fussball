@@ -1,0 +1,23 @@
+{% if app.session.flashBag.has('success') %}
+  <div class="alert alert-success" role="alert">
+    <div class="container">
+      {{ app.session.flashBag.get('success')[0]|raw }}
+    </div>
+  </div>
+{% endif %}
+
+{% if app.session.flashBag.has('error') %}
+  <div class="alert alert-danger" role="alert">
+    <div class="container">
+      {{ app.session.flashBag.get('error')[0]|raw }}
+    </div>
+  </div>
+{% endif %}
+
+{% if app.session.flashBag.has('warning') %}
+  <div class="alert alert-warning" role="alert">
+    <div class="container">
+      {{ app.session.flashBag.get('warning')[0]|raw }}
+    </div>
+  </div>
+{% endif %}

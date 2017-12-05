@@ -1,0 +1,15 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    <div>
+        {#{% if favourited == 0 %}#}
+            {#<div id="favourite">#}
+            {{ form_start(favouriteForm) }}
+                {{ form(favouriteForm) }}
+            {{ form_end(favouriteForm) }}
+            {#</div>#}
+        {#{% else %}#}
+            {#<h4>Dodano do ulubionych :)</h4>#}
+        {#{% endif %}#}
+    </div>
+{% endblock %}

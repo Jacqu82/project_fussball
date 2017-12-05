@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Club;
 use AppBundle\Form\ClubType;
+use AppBundle\Form\FavouriteType;
 use AppBundle\Manager\ClubManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

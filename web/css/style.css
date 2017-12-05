@@ -13,17 +13,22 @@ form {
     margin: 0 auto;
 }
 
+.g-recaptcha {
+    width: 300px;
+    margin: 0 auto;
+}
 
-/*.forms, #username, #password, #id {*/
-    /*width: 30%;*/
-    /*padding: 12px 20px;*/
-    /*margin: 8px 0;*/
-    /*display: inline-block;*/
-    /*border: 1px solid #ccc;*/
-    /*border-radius: 4px;*/
-    /*box-sizing: border-box;*/
-    /*color: #0f192a;*/
-/*}*/
+
+.forms, #username, #password, #id {
+    width: 60%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #0f192a;
+}
 
 /*.button, button {*/
     /*background-color: #4CAF50;*/
@@ -75,7 +80,7 @@ h1 {
     font-size: 45px;
     font-weight: normal;
     line-height: 48px;
-    margin: 40px;
+    margin: 20px;
 }
 
 h2 {

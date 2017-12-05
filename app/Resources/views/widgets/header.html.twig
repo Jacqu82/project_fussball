@@ -15,9 +15,9 @@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="{{ path('fos_user_registration_register') }}">Utwórz konto</a>
+                                <a href="{{ path('register') }}">Utwórz konto</a>
                             </li>
-                            <li><a href="{{ path('fos_user_security_login') }}">
+                            <li><a href="{{ path('login') }}">
                                     <span class="glyphicon glyphicon-log-in"></span> Zaloguj się
                                 </a>
                             </li>
@@ -44,7 +44,7 @@
                             <li class="user" style="margin-top: 15px;">Zalogowany jako
                                 <a class="user" href="{{ path('user_show_id', {'id': user.id}) }}">{{ app.user.username }}</a>
                             </li>
-                            <li><a href="{{ path('fos_user_security_logout') }}">
+                            <li><a href="{{ path('logout') }}">
                                     <span class="glyphicon glyphicon-log-out"></span> Wyloguj
                                 </a>
                             </li>

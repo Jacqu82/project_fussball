@@ -3,6 +3,10 @@
 parameters:
     #parameter_name: value
 
+    mailer_service:
+        sender_address: "%mailer_sender_address%"
+        sender_name: "%website_domain%"
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -17,7 +21,7 @@ services:
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     AppBundle\:
-        resource: '../../src/AppBundle/{Manager,Service}'
+        resource: '../../src/AppBundle/{Manager,Service,Validator}'
         # you can exclude directories or files
         # but if a service is unused, it's removed anyway
         exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
@@ -33,3 +37,7 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+    AppBundle\Service\MailerService:
+        arguments:
+            $params: '%mailer_service%'

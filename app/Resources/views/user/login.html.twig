@@ -1,0 +1,21 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    {% include 'widgets/header.html.twig' %}
+    <div class="container text-center">
+        <h1>Strona logowania</h1>
+        <form action="{{ path('login') }}" method="post">
+            <input type="text" id="username" placeholder="Nazwa użytkownika" name="_username" value="{{ username }}"/><br/><br/>
+            <input type="password" id="password" placeholder="Hasło" name="_password"/><br/><br/>
+            <button class="links btn btn-success" type="submit">Zaloguj się</button>
+        </form>
+        <hr/>
+        <h3><a href="{{ path('recovery') }}" class="links btn btn-info">Zapomnialeś hasła?</a></h3>
+        <hr/>
+        <h3>Nie masz konta?</h3>
+        <h3><a href="{{ path('register') }}" class="links btn btn-info">Zarejestruj się</a></h3>
+    </div>
+{% endblock %}
+{% block footer %}
+    {% include 'widgets/footer.html.twig' %}
+{% endblock %}

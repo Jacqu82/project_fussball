@@ -5,17 +5,17 @@
     <div class="container text-center">
         <h1>{{ user.username }}</h1>
         <h3>E-mail: {{ user.email }}</h3>
-        <h3>Ostatnio zalogowany: {{ user.lastLogin|date('d-m-Y H:i:s') }}</h3>
-        {% if user.enabled == 1 %}
-            <h3>Status: Aktywny</h3>
-        {% else %}
-            <h3>Status: Nieaktywny</h3>
-        {% endif %}
-        {% for role in user.roles %}
-            <h3>{{ role }}</h3>
-        {% endfor %}
+        <h3>Rola: {{ user.role|capitalize }}</h3>
+        <h3>
+            {% if user.isActive %}
+                Status: Aktywny
+            {% else %}
+                Status: Nieaktywny
+            {% endif %}
+        </h3>
+        <h3>Utworzony: {{ user.getCreatedAt|date('d-m-Y H:i:s') }}</h3>
         <hr/>
-        {#<a href="{{ path('edit_user', {'id': user.id}) }}" class="btn btn-warning">Edytuj swoje dane</a><br/>#}
+        <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-warning">Edytuj swoje dane</a><br/><br/>
         {{ form_start(deleteForm) }}
             {{ form_widget(deleteForm.submit) }}
             {{ form_rest(deleteForm) }}

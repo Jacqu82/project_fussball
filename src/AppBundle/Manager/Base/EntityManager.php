@@ -3,7 +3,7 @@
 namespace AppBundle\Manager\Base;
 
 use AppBundle\Entity\Base\EntityInterface;
-//use AppBundle\Entity\User\User;
+use AppBundle\Entity\User;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -56,13 +56,13 @@ abstract class EntityManager
         return true;
     }
 
-//    /**
-//     * Get current user or null
-//     *
-//     * @return User|null Current user or null if not logged
-//     */
-//    protected function getCurrentUser()
-//    {
-//        return self::$currentUser;
-//    }
+    /**
+     * Get current user or null
+     *
+     * @return User|null Current user or null if not logged
+     */
+    protected function getCurrentUser()
+    {
+        return self::$currentUser;
+    }
 }

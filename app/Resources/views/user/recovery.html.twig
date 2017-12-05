@@ -1,0 +1,15 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+    {% include 'widgets/header.html.twig' %}
+    <div class="container text-center">
+        <h1>Zmień hasło</h1>
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.submit) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+{% block footer %}
+    {% include 'widgets/footer.html.twig' %}
+{% endblock %}

@@ -118,9 +118,9 @@ class Club
     public function __construct()
     {
         $this->players = new ArrayCollection();
+//        $this->favourites = new ArrayCollection();
     }
-
-
+    
     /**
      * Get id
      *
@@ -479,4 +479,38 @@ class Club
     {
         return $this->content;
     }
+
+//    /**
+//     * Add favourite
+//     *
+//     * @param Favourite $favourite
+//     *
+//     * @return $this
+//     */
+//    public function addFavourite(Favourite $favourite)
+//    {
+//        $this->favourites[] = $favourite;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Remove favourite
+//     *
+//     * @param Favourite $favourite
+//     */
+//    public function removeFavourite(Favourite $favourite)
+//    {
+//        $this->favourites->removeElement($favourite);
+//    }
+//
+//    /**
+//     * Get favourites
+//     *
+//     * @return Collection
+//     */
+//    public function getFavourites()
+//    {
+//        return $this->favourites;
+//    }
 }

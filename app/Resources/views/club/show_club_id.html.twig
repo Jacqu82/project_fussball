@@ -16,6 +16,8 @@
         <h3>Trener: {{ club.coach }}</h3>
         <h3>Największe sukcesy: </h3>
         <h5>{{ club.content }}</h5>
+        {#{{ render(controller('AppBundle:Favourite:addFavourite', {'id': club.id, 'request': app.request})) }}#}
+
         <h1>Kadra:</h1>
         <table align="center">
             <tr>
