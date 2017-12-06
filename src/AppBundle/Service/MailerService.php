@@ -35,6 +35,7 @@ class MailerService
 
     public function sendRecoveryPasswordMessage(User $user, $password)
     {
+        //wiadomośc z nowym hasłem
         $message = \Swift_Message::newInstance()
             ->setFrom($this->params['sender_address'], $this->params['sender_name'])
             ->setSubject('Twoje nowe hasło w Ekstraklasa :)')
@@ -46,7 +47,7 @@ class MailerService
 
     public function sendRecoveryMessage(User $user, $token)
     {
-        //wiadomośc z nowym hasłem
+        //wiadomość do odzyskania nowego hasła
         $message = \Swift_Message::newInstance()
             ->setFrom($this->params['sender_address'], $this->params['sender_name'])
             ->setSubject('Zmiana hasła w Ekstraklasa!')

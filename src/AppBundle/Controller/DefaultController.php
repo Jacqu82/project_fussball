@@ -44,7 +44,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/user/show", name="show_users_all")
+     * @Route("/user/show", name="user_show_all")
      * @return Response
      */
     public function showAllUsersAction()
@@ -57,7 +57,7 @@ class DefaultController extends Controller
 
         $users = $this->get(UserManager::class)->getAllUsersByName();
 
-        return $this->render('user/show_users.html.twig', ['users' => $users, 'action' => $action]);
+        return $this->render('user/show_all_users.html.twig', ['users' => $users, 'action' => $action]);
     }
 
     /**
@@ -76,7 +76,7 @@ class DefaultController extends Controller
                 'attr' => ['class' => 'btn btn-danger btn-delete']])
             ->getForm();
 
-        return $this->render('user/user_details.html.twig', [
+        return $this->render('user/show_user_id.html.twig', [
             'user' => $user,
             'deleteForm' => $deleteForm->createView()
         ]);
@@ -118,6 +118,6 @@ class DefaultController extends Controller
     public function deleteUserAction(User $user)
     {
         $this->get(UserManager::class)->deleteUser($user);
-        return $this->redirectToRoute('show_users_all');
+        return $this->redirectToRoute('user_show_all');
     }
 }
