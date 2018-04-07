@@ -4,7 +4,6 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Club;
 use AppBundle\Form\ClubType;
-use AppBundle\Form\FavouriteType;
 use AppBundle\Manager\ClubManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,6 +15,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ClubController extends Controller
 {
+    private $clubManager;
+
+    public function __construct(ClubManager $clubManager)
+    {
+
+        $this->clubManager = $clubManager;
+    }
 
     /**
      * @Route("/club/add", name="club_add")
@@ -36,7 +42,7 @@ class ClubController extends Controller
                 $this->getParameter('path_directory'),
                 $fileName);
             $club->setEmblem($fileName);
-            $this->get(ClubManager::class)->addClub($club);
+            $this->clubManager->addClub($club);
 
             return $this->redirectToRoute('club_show_id', ['id' => $club->getId()]);
         }
@@ -74,7 +80,7 @@ class ClubController extends Controller
      */
     public function showAllClubsAction()
     {
-        $clubs = $this->get(ClubManager::class)->getAllClubsByName();
+        $clubs = $this->clubManager->getAllClubsByName();
 
         return $this->render('club/show_all_clubs.html.twig', ['clubs' => $clubs]);
     }
@@ -92,10 +98,7 @@ class ClubController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $club = $form->getData();
-            $file = $club->getEmblem();
-            $club->setEmblem($file);
-            $this->get(ClubManager::class)->editClub($club);
+            $this->clubManager->editClub($club);
 
             return $this->redirectToRoute('club_show_id', ['id' => $club->getId()]);
         }
@@ -129,7 +132,7 @@ class ClubController extends Controller
                 $this->getParameter('path_directory'),
                 $fileName);
             $club->setEmblem($fileName);
-            $this->get(ClubManager::class)->editClub($club);
+            $this->clubManager->editClub($club);
 
             return $this->redirectToRoute('club_show_id', ['id' => $club->getId()]);
         }
@@ -150,7 +153,7 @@ class ClubController extends Controller
      */
     public function deleteClubAction(Club $club)
     {
-        $this->get(ClubManager::class)->deleteClub($club);
+        $this->clubManager->deleteClub($club);
         return $this->redirectToRoute('club_show_all');
     }
 }

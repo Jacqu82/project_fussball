@@ -1,6 +1,4 @@
-{% extends "::base.html.twig" %}
 
-{% block body %}
     <script>
         var longitude = JSON.parse({{ club.longitude|raw }});
         var latitude = JSON.parse({{ club.latitude|raw }});
@@ -115,8 +113,7 @@
             });
         }
     </script>
-    <div id="map" style="width: 710px; height:500px; margin-left: 5px;"></div>
+    <div id="map" style="width: 720px; height:500px; margin: 0 auto"></div>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGIUHCRMEXI3XjoD8m8jBdKQEiPwpL0_M&callback=initMap">
     </script>
-{% endblock %}

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Enum\PlayerPosition;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -278,5 +279,37 @@ class Player
     public function getClub()
     {
         return $this->club;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGoalKeeper()
+    {
+        return PlayerPosition::GOALKEEPER;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDefender()
+    {
+        return PlayerPosition::DEFENDER;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMidfielder()
+    {
+        return PlayerPosition::MIDFIELDER;
+    }
+
+    /**
+     * @return string
+     */
+    public function getForward()
+    {
+        return PlayerPosition::FORWARD;
     }
 }

@@ -16,6 +16,13 @@ use Symfony\Component\HttpFoundation\Response;
 class GameController extends Controller
 {
 
+    private $gameManager;
+
+    public function __construct(GameManager $gameManager)
+    {
+        $this->gameManager = $gameManager;
+    }
+
     /**
      * @Route("/game/add", name="game_add")
      *
@@ -29,7 +36,7 @@ class GameController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $this->get(GameManager::class)->addGame($game);
+            $this->gameManager->addGame($game);
         }
 
         return $this->render('game/add_game.html.twig', ['form' => $form->createView()]);
@@ -70,7 +77,7 @@ class GameController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $this->get(GameManager::class)->editGame($game);
+            $this->gameManager->editGame($game);
 
             return $this->redirectToRoute('game_show_id', ['id' => $game->getId()]);
         }
@@ -90,7 +97,7 @@ class GameController extends Controller
      */
     public function deleteGameAction(Game $game)
     {
-        $this->get(GameManager::class)->deleteGame($game);
+        $this->gameManager->deleteGame($game);
         return $this->redirectToRoute('round_show_id', ['id' => $game->getRound()->getId()]);
     }
 }

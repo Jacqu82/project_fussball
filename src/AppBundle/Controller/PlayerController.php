@@ -15,6 +15,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PlayerController extends Controller
 {
+    private $playerManager;
+
+    public function __construct(PlayerManager $playerManager)
+    {
+        $this->playerManager = $playerManager;
+    }
 
     /**
      * @Route("/player/add", name="player_add")
@@ -29,7 +35,7 @@ class PlayerController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $this->get(PlayerManager::class)->addPlayer($player);
+            $this->playerManager->addPlayer($player);
         }
 
         return $this->render('player/add_player.html.twig', ['form' => $form->createView()]);
@@ -58,7 +64,6 @@ class PlayerController extends Controller
         ]);
     }
 
-
     /**
      * @Route("/player/edit/{id}", name="player_edit")
      *
@@ -72,7 +77,7 @@ class PlayerController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $this->get(PlayerManager::class)->editPlayer($player);
+            $this->playerManager->editPlayer($player);
 
             return $this->redirectToRoute('player_show_id', ['id' => $player->getId()]);
         }
@@ -83,7 +88,6 @@ class PlayerController extends Controller
         ]);
     }
 
-
     /**
      * @Route("/player/delete/{id}", name="player_delete")
      *
@@ -93,9 +97,7 @@ class PlayerController extends Controller
      */
     public function deletePlayerAction(Player $player)
     {
-        $this->get(PlayerManager::class)->deletePlayer($player);
+        $this->playerManager->deletePlayer($player);
         return $this->redirectToRoute('club_show_id', ['id' => $player->getClub()->getId()]);
     }
-
-
 }

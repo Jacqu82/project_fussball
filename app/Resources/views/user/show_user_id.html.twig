@@ -1,7 +1,6 @@
-{% extends "::base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
         <h1>{{ user.username }}</h1>
         <h3>E-mail: {{ user.email }}</h3>
@@ -17,13 +16,10 @@
         <hr/>
         <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-warning">Edytuj dane</a><br/><br/>
         {{ form_start(deleteForm) }}
-            {{ form_widget(deleteForm.submit) }}
-            {{ form_rest(deleteForm) }}
+        {{ form_widget(deleteForm.submit) }}
+        {{ form_rest(deleteForm) }}
         {{ form_end(deleteForm) }}
         <hr/>
         <a href="{{ path('user_show_all') }}" class="btn btn-default">Powrót</a>
     </div>
-{% endblock %}
-{% block footer %}
-    {% include 'widgets/footer.html.twig' %}
 {% endblock %}

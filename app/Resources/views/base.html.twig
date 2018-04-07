@@ -2,21 +2,22 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>{% spaceless %}{% block title %}Ekstraklasa{% endblock %}{% endspaceless %}</title>
+    <title>{% block title %}Ekstraklasa{% endblock %}</title>
     {% block stylesheets %}
         <link href="{{ asset('framework/css/bootstrap.min.css') }}" rel="stylesheet"/>
         <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('ekstraklasa.ico') }}"/>
-    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
-    <div class="container">
-        <div style="padding-top: auto;">
-            {{ include('flash/flash_messages.html.twig') }}
-            {% block body %}{% endblock %}
-        </div>
+{% include 'widgets/header.html.twig' %}
+<div class="container">
+    <div style="padding-top: auto;">
+        {{ include('flash/flash_messages.html.twig') }}
     </div>
+</div>
+{% block body %}{% endblock %}
+{% include 'widgets/footer.html.twig' %}
 {% block javascripts %}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="{{ asset('framework/js/bootstrap.min.js') }}"></script>

@@ -1,12 +1,10 @@
-{% extends "::base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
-    <h3>Dodaj klub do bazy danych</h3>
+        <h3>Dodaj klub do bazy danych</h3>
         {{ form_start(form) }}
         {{ form(form) }}
         {{ form_end(form) }}
     </div>
-    {% include 'widgets/footer.html.twig' %}
 {% endblock %}

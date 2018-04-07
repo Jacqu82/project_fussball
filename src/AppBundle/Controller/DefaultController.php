@@ -13,16 +13,29 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DefaultController extends Controller
 {
+    private $clubManager;
+    private $userManager;
+    private $checker;
+
+    public function __construct(ClubManager $clubManager, UserManager $userManager, AuthorizationCheckerInterface $checker)
+    {
+
+        $this->clubManager = $clubManager;
+        $this->userManager = $userManager;
+        $this->checker = $checker;
+    }
+
     /**
      * @Route("/", name="homepage")
      * @return Response
      */
     public function indexAction()
     {
-        $places = $this->get(ClubManager::class)->getLocations();
+        $places = $this->clubManager->getLocations();
         $locations = json_encode($places);
 
         return $this->render('default/homepage.html.twig', ['locations' => $locations]);
@@ -34,7 +47,7 @@ class DefaultController extends Controller
      */
     public function adminPanelAction()
     {
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($this->checker->isGranted('ROLE_ADMIN')) {
             $action = true;
         } else {
             $action = false;
@@ -49,13 +62,13 @@ class DefaultController extends Controller
      */
     public function showAllUsersAction()
     {
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+        if ($this->checker->isGranted('ROLE_ADMIN')) {
             $action = true;
         } else {
             $action = false;
         }
 
-        $users = $this->get(UserManager::class)->getAllUsersByName();
+        $users = $this->userManager->getAllUsersByName();
 
         return $this->render('user/show_all_users.html.twig', ['users' => $users, 'action' => $action]);
     }
@@ -96,7 +109,7 @@ class DefaultController extends Controller
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->get(UserManager::class)->editUser($user);
+                $this->userManager->editUser($user);
 
                 return $this->redirectToRoute('user_show_id', ['id' => $user->getId()]);
             }
@@ -117,7 +130,7 @@ class DefaultController extends Controller
      */
     public function deleteUserAction(User $user)
     {
-        $this->get(UserManager::class)->deleteUser($user);
+        $this->userManager->deleteUser($user);
         return $this->redirectToRoute('user_show_all');
     }
 }

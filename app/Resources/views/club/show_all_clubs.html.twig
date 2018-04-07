@@ -1,7 +1,6 @@
-{% extends "::base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
         <h1>Kluby Ekstraklasy</h1>
         <hr/>
@@ -22,7 +21,6 @@
                 </a>
             {% endif %}
         {% endfor %}
+        <hr/>
     </div>
-    <hr/>
-    {% include 'widgets/footer.html.twig' %}
 {% endblock %}

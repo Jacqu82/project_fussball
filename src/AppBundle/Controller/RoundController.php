@@ -10,6 +10,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RoundController extends Controller
 {
+    private $roundManager;
+
+    public function __construct(RoundManager $roundManager)
+    {
+        $this->roundManager = $roundManager;
+    }
+
     /**
      * @Route("/round/show", name="round_show_all")
      *
@@ -17,7 +24,7 @@ class RoundController extends Controller
      */
     public function showAllRoundsAction()
     {
-        $rounds = $this->get(RoundManager::class)->getAllRounds();
+        $rounds = $this->roundManager->getAllRounds();
 
         return $this->render('round/show_all_rounds.html.twig', ['rounds' => $rounds]);
     }

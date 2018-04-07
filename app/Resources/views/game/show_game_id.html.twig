@@ -1,7 +1,6 @@
-{% extends "::base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
         <h1>{{ game.date }}r.&nbsp; godz. {{ game.hour }}<br/><br/>
             {{ game.homeTeam }} {{ game.goalsHomeTeam }} : {{ game.goalsAwayTeam }} {{ game.awayTeam }}</h1>
@@ -17,5 +16,4 @@
     {% endif %}
         <a href="{{ path('round_show_id', {'id': game.round.id}) }}" class="btn btn-info">Powrót</a>
     </div>
-    {% include 'widgets/footer.html.twig' %}
 {% endblock %}

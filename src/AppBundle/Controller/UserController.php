@@ -12,10 +12,19 @@ use AppBundle\Manager\UserManager;
 use AppBundle\Controller\Base\Controller;
 use AppBundle\Form\RegisterType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 
 class UserController extends Controller
 {
+    private $userManager;
+    private $checker;
+
+    public function __construct(UserManager $userManager, AuthorizationCheckerInterface $checker)
+    {
+        $this->userManager = $userManager;
+        $this->checker = $checker;
+    }
 
     /**
      * @Route("/register")
@@ -48,7 +57,7 @@ class UserController extends Controller
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $this->get(UserManager::class)->create($register->getUser());
+                $this->userManager->create($register->getUser());
                 $this->setSuccess('Twoje konto zostało poprawnie założone! Na podany przez Ciebie adres email została wysłana wiadomość z linkiem aktywacyjnym.');
             } else {
                 $this->setError('W formularzu występują błędy! Popraw je i spróbuj ponownie');
@@ -65,7 +74,7 @@ class UserController extends Controller
      */
     public function loginAction()
     {
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_USER'))
+        if ($this->checker->isGranted('ROLE_USER'))
             return $this->redirectToRoute('homepage');
 
         $authenticationUtils = $this->get('security.authentication_utils');
@@ -100,9 +109,8 @@ class UserController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $manager = $this->get(UserManager::class);
-                $user = $manager->getOneBy(['email' => $form->get('email')->getData()]);
-                $manager->sendRecoveryMessage($user);
+                $user = $this->userManager->getOneBy(['email' => $form->get('email')->getData()]);
+                $this->userManager->sendRecoveryMessage($user);
                 $this->setSuccess('Na Twój nowo podany adres email została wysłana wiadomość z instrukcją dalszego postępowania.');
             }
         }
@@ -125,13 +133,11 @@ class UserController extends Controller
      */
     public function activateAction($type, User $user, $token, $value = null)
     {
-        $manager = $this->get(UserManager::class);
-
         switch ($type) {
             case 'account':
                 if ($user->isEnabled()) {
                     $this->setWarning('Twoje konto zostało wcześniej aktywowane i jest już aktywne.');
-                } elseif ($manager->activate($user, $token)) {
+                } elseif ($this->userManager->activate($user, $token)) {
                     $this->setSuccess('Twoje konto zostało poprawnie aktywowane :)');
                 } else {
                     $this->setError('Aktywacja nie powiodła się. Użyty adres URL jest nieprawidłowy. Prosimy o ponowne kliknięcie w link, bądź dokładne przekopiowanie linku.');
@@ -139,16 +145,8 @@ class UserController extends Controller
                 break;
 
             case 'password':
-                if ($manager->recovery($user, $token)) {
+                if ($this->userManager->recovery($user, $token)) {
                     $this->setSuccess('Proces odzyskiwania dostępu do konta został zakończony powodzeniem. Na Twój adres email wysłaliśmy nowe dane dostępowe.');
-                } else {
-                    $this->setError('Aktywacja nie powiodła się. Użyty adres URL jest nieprawidłowy. Prosimy o ponowne kliknięcie w link, bądź dokładne przekopiowanie linku.');
-                }
-                break;
-
-            case 'email':
-                if ($manager->changeEmail($user, urldecode($value), $token)) {
-                    $this->setSuccess('Adres email dla Twojego konta został poprawnie zmieniony.');
                 } else {
                     $this->setError('Aktywacja nie powiodła się. Użyty adres URL jest nieprawidłowy. Prosimy o ponowne kliknięcie w link, bądź dokładne przekopiowanie linku.');
                 }

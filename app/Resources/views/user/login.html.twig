@@ -1,7 +1,6 @@
-{% extends "::base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
         <h1>Strona logowania</h1>
         <form action="{{ path('login') }}" method="post">
@@ -15,7 +14,4 @@
         <h3>Nie masz konta?</h3>
         <h3><a href="{{ path('register') }}" class="links btn btn-info">Zarejestruj się</a></h3>
     </div>
-{% endblock %}
-{% block footer %}
-    {% include 'widgets/footer.html.twig' %}
 {% endblock %}

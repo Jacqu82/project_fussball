@@ -1,7 +1,6 @@
-{% extends "::base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
         <h2>Edycja użytkownika</h2>
         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
@@ -10,9 +9,6 @@
     </div>
     <hr/>
     <p class="text-center">
-    <a href="{{ path('user_show_id', {'id': user.id}) }}" class="btn btn-default">Powrót</a>
+        <a href="{{ path('user_show_id', {'id': user.id}) }}" class="btn btn-default">Powrót</a>
     </p>
-{% endblock %}
-{% block footer %}
-    {% include 'widgets/footer.html.twig' %}
 {% endblock %}

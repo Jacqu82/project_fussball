@@ -1,7 +1,6 @@
-{% extends "::base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
         <h1>{{ player.name }}</h1>
         <h3>Pozycja: {{ player.position }}</h3>
@@ -10,16 +9,15 @@
         <h3>Wzrost/Waga: {{ player.growth }}cm / {{ player.weight }}kg</h3>
         <h3>Poprzedni klub: {{ player.previousClub }}</h3>
         <hr/>
-    {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('player_edit', {'id': player.id}) }}" class="btn btn-warning">Edytuj dane</a>
-        <hr/>
-        {{ form_start(deleteForm) }}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('player_edit', {'id': player.id}) }}" class="btn btn-warning">Edytuj dane</a>
+            <hr/>
+            {{ form_start(deleteForm) }}
             {{ form_widget(deleteForm.submit) }}
             {{ form_rest(deleteForm) }}
-        {{ form_end(deleteForm) }}
-        <hr/>
-    {% endif %}
+            {{ form_end(deleteForm) }}
+            <hr/>
+        {% endif %}
         <a href="{{ path('club_show_id', {'id': player.club.id}) }}" class="btn btn-info">Powrót</a>
     </div>
-    {% include 'widgets/footer.html.twig' %}
 {% endblock %}

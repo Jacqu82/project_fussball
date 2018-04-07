@@ -114,7 +114,6 @@ th, td {
 }
 
 .map {
-    width: 70%;
-    margin: 0 auto;
     color: #0f0f0f;
+    margin-top: 20px;
 }

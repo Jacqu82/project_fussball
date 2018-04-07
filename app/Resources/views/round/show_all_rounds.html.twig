@@ -1,15 +1,12 @@
-{% extends "::base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
-        <h1>Terminarz Ekstraklasy</h1>
-        <hr/>
+    <h1>Terminarz Ekstraklasy</h1>
+    <hr/>
     {% for round in rounds %}
         <a href="{{ path('round_show_id', {'id': round.id}) }}"
            class="links btn btn-success">{{ round.roundNumber }}. kolejka</a>
     {% endfor %}
-
-        <hr/>
-    {% include 'widgets/footer.html.twig' %}
+    <hr/>
 {% endblock %}

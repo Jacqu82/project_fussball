@@ -1,7 +1,6 @@
-{% extends "::base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    {% include 'widgets/header.html.twig' %}
     <div class="container text-center">
         <h1>{{ club.name }}</h1>
         <img src="{{ club.getWebPath }}" width="300" height="300">
@@ -16,7 +15,6 @@
         <h3>Trener: {{ club.coach }}</h3>
         <h3>Największe sukcesy: </h3>
         <h5>{{ club.content }}</h5>
-        {#{{ render(controller('AppBundle:Favourite:addFavourite', {'id': club.id, 'request': app.request})) }}#}
 
         <h1>Kadra:</h1>
         <table align="center">
@@ -28,61 +26,65 @@
                 <th>Wzrost/Waga</th>
                 <th>Poprzedni klub</th>
             </tr>
-        {% for player in club.players %}
-            {% if player.position == 'Bramkarz' %}
-            <tr style="color: red">
-                <td><a href="{{ path('player_show_id', {'id': player.id}) }}" class="btn btn-danger">{{ player.name }}</a></td>
-                <td>{{ player.position }}</td>
-                <td>{{ player.country }}</td>
-                <td>{{ player.dateOfBirth }}</td>
-                <td>{{ player.growth }}/{{ player.weight }}</td>
-                <td>{{ player.previousClub }}</td>
-            </tr>
-            {% endif %}
-        {% endfor %}
-        {% for player in club.players %}
-            {% if player.position == 'Obrońca' %}
-            <tr style="color: gold">
-                <td><a href="{{ path('player_show_id', {'id': player.id}) }}" class="btn btn-warning">{{ player.name }}</a></td>
-                <td>{{ player.position }}</td>
-                <td>{{ player.country }}</td>
-                <td>{{ player.dateOfBirth }}</td>
-                <td>{{ player.growth }}/{{ player.weight }}</td>
-                <td>{{ player.previousClub }}</td>
-            </tr>
-            {% endif %}
-        {% endfor %}
-        {% for player in club.players %}
-            {% if player.position == 'Pomocnik' %}
-            <tr style="color: green">
-                <td><a href="{{ path('player_show_id', {'id': player.id}) }}" class="btn btn-success">{{ player.name }}</a></td>
-                <td>{{ player.position }}</td>
-                <td>{{ player.country }}</td>
-                <td>{{ player.dateOfBirth }}</td>
-                <td>{{ player.growth }}/{{ player.weight }}</td>
-                <td>{{ player.previousClub }}</td>
-            </tr>
-            {% endif %}
-        {% endfor %}
-        {% for player in club.players %}
-            {% if player.position == 'Napastnik' %}
-            <tr style="color: blue">
-                <td><a href="{{ path('player_show_id', {'id': player.id}) }}" class="btn btn-primary">{{ player.name }}</a></td>
-                <td>{{ player.position }}</td>
-                <td>{{ player.country }}</td>
-                <td>{{ player.dateOfBirth }}</td>
-                <td>{{ player.growth }}/{{ player.weight }}</td>
-                <td>{{ player.previousClub }}</td>
-            </tr>
-            {% endif %}
-        {% endfor %}
+            {% for player in club.players %}
+                {% if player.position == player.goalKeeper %}
+                    <tr style="color: red">
+                        <td><a href="{{ path('player_show_id', {'id': player.id}) }}"
+                               class="btn btn-danger">{{ player.name }}</a></td>
+                        <td>{{ player.position }}</td>
+                        <td>{{ player.country }}</td>
+                        <td>{{ player.dateOfBirth }}</td>
+                        <td>{{ player.growth }}/{{ player.weight }}</td>
+                        <td>{{ player.previousClub }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            {% for player in club.players %}
+                {% if player.position == player.defender %}
+                    <tr style="color: gold">
+                        <td><a href="{{ path('player_show_id', {'id': player.id}) }}"
+                               class="btn btn-warning">{{ player.name }}</a></td>
+                        <td>{{ player.position }}</td>
+                        <td>{{ player.country }}</td>
+                        <td>{{ player.dateOfBirth }}</td>
+                        <td>{{ player.growth }}/{{ player.weight }}</td>
+                        <td>{{ player.previousClub }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            {% for player in club.players %}
+                {% if player.position == player.midfielder %}
+                    <tr style="color: green">
+                        <td><a href="{{ path('player_show_id', {'id': player.id}) }}"
+                               class="btn btn-success">{{ player.name }}</a></td>
+                        <td>{{ player.position }}</td>
+                        <td>{{ player.country }}</td>
+                        <td>{{ player.dateOfBirth }}</td>
+                        <td>{{ player.growth }}/{{ player.weight }}</td>
+                        <td>{{ player.previousClub }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            {% for player in club.players %}
+                {% if player.position == player.forward %}
+                    <tr style="color: blue">
+                        <td><a href="{{ path('player_show_id', {'id': player.id}) }}"
+                               class="btn btn-primary">{{ player.name }}</a></td>
+                        <td>{{ player.position }}</td>
+                        <td>{{ player.country }}</td>
+                        <td>{{ player.dateOfBirth }}</td>
+                        <td>{{ player.growth }}/{{ player.weight }}</td>
+                        <td>{{ player.previousClub }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
         </table>
         <hr/>
         <div class="container text-center">
             <h3>Położenie stadionu na mapie</h3>
         </div>
         <div class="container map">
-        {% include 'widgets/location.html.twig' %}
+            {% include 'widgets/location.html.twig' %}
         </div>
         <hr/>
         {% if is_granted('ROLE_ADMIN') %}
@@ -97,5 +99,4 @@
         {% endif %}
         <a href="{{ path('club_show_all') }}" class="btn btn-info">Powrót</a>
     </div>
-    {% include 'widgets/footer.html.twig' %}
 {% endblock %}
