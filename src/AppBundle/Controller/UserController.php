@@ -3,13 +3,14 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User\Register;
+use AppBundle\Service\FlashMessagesService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\User\User;
 use AppBundle\Form\RecoveryType;
 use AppBundle\Manager\UserManager;
-use AppBundle\Controller\Base\Controller;
 use AppBundle\Form\RegisterType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -19,11 +20,13 @@ class UserController extends Controller
 {
     private $userManager;
     private $checker;
+    private $flashMessages;
 
-    public function __construct(UserManager $userManager, AuthorizationCheckerInterface $checker)
+    public function __construct(UserManager $userManager, AuthorizationCheckerInterface $checker, FlashMessagesService $flashMessages)
     {
         $this->userManager = $userManager;
         $this->checker = $checker;
+        $this->flashMessages = $flashMessages;
     }
 
     /**
@@ -58,9 +61,9 @@ class UserController extends Controller
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 $this->userManager->create($register->getUser());
-                $this->setSuccess('Twoje konto zostało poprawnie założone! Na podany przez Ciebie adres email została wysłana wiadomość z linkiem aktywacyjnym.');
+                $this->flashMessages->setSuccess('Twoje konto zostało poprawnie założone! Na podany przez Ciebie adres email została wysłana wiadomość z linkiem aktywacyjnym.');
             } else {
-                $this->setError('W formularzu występują błędy! Popraw je i spróbuj ponownie');
+                $this->flashMessages->setError('W formularzu występują błędy! Popraw je i spróbuj ponownie');
             }
         }
 
@@ -82,7 +85,7 @@ class UserController extends Controller
         $lastUsername = $authenticationUtils->getLastUsername();
 
         if (isset($error)) {
-            $this->setError('Nieprawidłowy login i/lub hasło!');
+            $this->flashMessages->setError('Nieprawidłowy login i/lub hasło!');
         }
 
         return $this->render('user/login.html.twig', [
@@ -111,7 +114,7 @@ class UserController extends Controller
             if ($form->isValid()) {
                 $user = $this->userManager->getOneBy(['email' => $form->get('email')->getData()]);
                 $this->userManager->sendRecoveryMessage($user);
-                $this->setSuccess('Na Twój nowo podany adres email została wysłana wiadomość z instrukcją dalszego postępowania.');
+                $this->flashMessages->setSuccess('Na Twój nowo podany adres email została wysłana wiadomość z instrukcją dalszego postępowania.');
             }
         }
 
@@ -136,19 +139,19 @@ class UserController extends Controller
         switch ($type) {
             case 'account':
                 if ($user->isEnabled()) {
-                    $this->setWarning('Twoje konto zostało wcześniej aktywowane i jest już aktywne.');
+                    $this->flashMessages->setWarning('Twoje konto zostało wcześniej aktywowane i jest już aktywne.');
                 } elseif ($this->userManager->activate($user, $token)) {
-                    $this->setSuccess('Twoje konto zostało poprawnie aktywowane :)');
+                    $this->flashMessages->setSuccess('Twoje konto zostało poprawnie aktywowane :)');
                 } else {
-                    $this->setError('Aktywacja nie powiodła się. Użyty adres URL jest nieprawidłowy. Prosimy o ponowne kliknięcie w link, bądź dokładne przekopiowanie linku.');
+                    $this->flashMessages->setError('Aktywacja nie powiodła się. Użyty adres URL jest nieprawidłowy. Prosimy o ponowne kliknięcie w link, bądź dokładne przekopiowanie linku.');
                 }
                 break;
 
             case 'password':
                 if ($this->userManager->recovery($user, $token)) {
-                    $this->setSuccess('Proces odzyskiwania dostępu do konta został zakończony powodzeniem. Na Twój adres email wysłaliśmy nowe dane dostępowe.');
+                    $this->flashMessages->setSuccess('Proces odzyskiwania dostępu do konta został zakończony powodzeniem. Na Twój adres email wysłaliśmy nowe dane dostępowe.');
                 } else {
-                    $this->setError('Aktywacja nie powiodła się. Użyty adres URL jest nieprawidłowy. Prosimy o ponowne kliknięcie w link, bądź dokładne przekopiowanie linku.');
+                    $this->flashMessages->setError('Aktywacja nie powiodła się. Użyty adres URL jest nieprawidłowy. Prosimy o ponowne kliknięcie w link, bądź dokładne przekopiowanie linku.');
                 }
                 break;
 
