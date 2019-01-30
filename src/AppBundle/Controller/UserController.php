@@ -36,7 +36,6 @@ class UserController extends Controller
      */
     public function registerAction()
     {
-
         $register = new Register();
         $form = $this->createForm(RegisterType::class, $register, [
             'action' => $this->generateUrl('register')
